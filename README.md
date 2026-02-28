@@ -11,5 +11,6 @@ Describe the purpose of this project here.
 
 ## Conventions
 - Project-specific agent guidance lives in `AGENTS.md`
-- Global working preferences live at `/Users/wendy/.config/codex/PREFERENCES.md`
+- Shared Codex collaboration preferences should come from the `codex-preferences` repository
+- A local machine-specific copy may also exist at `/Users/wendy/.config/codex/PREFERENCES.md`
 - If work is paused mid-development, create `WIP_NOTES.md` to capture status and next steps

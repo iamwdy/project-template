@@ -1,6 +1,6 @@
 # Project Instructions
 
-Follow the shared Codex preferences documented in the `codex-preferences` repository.
+Follow the shared Codex preferences documented in the `codex-preferences` repository (`https://github.com/sheruwen/codex-preferences`).
 
 If a local machine-specific copy exists, it may live at:
 `/Users/wendy/.config/codex/PREFERENCES.md`

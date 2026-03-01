@@ -17,7 +17,7 @@ Before modifying files or running non-trivial commands in a project created from
 
 When a user asks to start a new project from this template, the default workflow is:
 
-1. Copy or clone this template into the new project folder.
+1. Create the new project with `scripts/new-project.sh <project-name-or-path>`.
 2. Read `AGENTS.md`.
 3. Load shared Codex preferences.
 4. Read `WIP_NOTES.md` if it exists.
@@ -28,11 +28,15 @@ Recommended user prompt:
 
 Interpret `np：<專案名>` as:
 
-1. Clone or copy `iamwdy/project-template` into the new project folder.
+1. Create the project with `scripts/new-project.sh <專案名>`.
 2. Read local `AGENTS.md`.
 3. Load shared Codex preferences.
 4. Read `WIP_NOTES.md` if it exists.
 5. Then begin project-specific work.
+
+Clarification:
+- `np：<專案名>` is a prompt convention for Codex, not an automatically available shell command.
+- If terminal shorthand is needed, install a shell alias or function that calls `scripts/new-project.sh`.
 
 ## Project-Specific Notes
 

@@ -6,19 +6,31 @@ PREFERENCES_CACHE_DIR="${HOME}/.config/codex"
 PREFERENCES_CACHE_FILE="${PREFERENCES_CACHE_DIR}/PREFERENCES.md"
 PREFERENCES_REPO_URL="https://github.com/iamwdy/codex-preferences"
 
+print_markdown_preview() {
+  local file_path="$1"
+  local label="$2"
+
+  if [ ! -f "${file_path}" ]; then
+    return 0
+  fi
+
+  echo
+  echo "===== ${label}: ${file_path} ====="
+  sed -n '1,160p' "${file_path}"
+}
+
 echo "Project template bootstrap"
 echo
 echo "This script prepares the local Codex preferences cache path used by AGENTS.md."
 echo "It does not install dependencies, edit .env files, or read secrets."
 echo
 
-mkdir -p "${PREFERENCES_CACHE_DIR}"
-
-if [ -f "${PREFERENCES_CACHE_FILE}" ]; then
-  echo "Preferences cache already exists:"
-  echo "  ${PREFERENCES_CACHE_FILE}"
-else
-  cat <<EOF > "${PREFERENCES_CACHE_FILE}"
+if mkdir -p "${PREFERENCES_CACHE_DIR}" 2>/dev/null; then
+  if [ -f "${PREFERENCES_CACHE_FILE}" ]; then
+    echo "Preferences cache already exists:"
+    echo "  ${PREFERENCES_CACHE_FILE}"
+  else
+    cat <<EOF > "${PREFERENCES_CACHE_FILE}"
 # Codex Preferences
 
 This file is a local cache placeholder.
@@ -28,8 +40,14 @@ ${PREFERENCES_REPO_URL}
 
 Replace this file with the current shared preferences when needed.
 EOF
-  echo "Created preferences cache placeholder:"
-  echo "  ${PREFERENCES_CACHE_FILE}"
+    echo "Created preferences cache placeholder:"
+    echo "  ${PREFERENCES_CACHE_FILE}"
+  fi
+else
+  echo "Unable to write preferences cache in this environment:"
+  echo "  ${PREFERENCES_CACHE_DIR}"
+  echo "Continue by reading the shared preferences source directly:"
+  echo "  ${PREFERENCES_REPO_URL}"
 fi
 
 if [ ! -f "WIP_NOTES.md" ]; then
@@ -55,3 +73,7 @@ echo "Next:"
 echo "1. Read AGENTS.md"
 echo "2. Review the shared Codex preferences source"
 echo "3. Update README.md and project metadata for this specific project"
+
+print_markdown_preview "AGENTS.md" "Project instructions"
+print_markdown_preview "${PREFERENCES_CACHE_FILE}" "Shared preferences cache"
+print_markdown_preview "WIP_NOTES.md" "Project notes"

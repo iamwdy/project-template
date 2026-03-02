@@ -35,8 +35,9 @@ Interpret `np：<專案名>` as:
 5. Then begin project-specific work.
 
 Clarification:
-- `np：<專案名>` is a prompt convention for Codex, not an automatically available shell command.
-- If terminal shorthand is needed, install a shell alias or function that calls `scripts/new-project.sh`.
+- The shell `np` function may be configured locally to call `scripts/new-project.sh`.
+- `scripts/new-project.sh` now prefers cloning the GitHub template and falls back to the local template copy.
+- `scripts/bootstrap-project.sh` prints `AGENTS.md`, shared preferences, and `WIP_NOTES.md` after project creation.
 
 ## Project-Specific Notes
 

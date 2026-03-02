@@ -5,10 +5,9 @@ Describe the purpose of this project here.
 
 ## New Project Flow
 1. Run `scripts/new-project.sh <project-name-or-path>` from this template repository
-2. Read `AGENTS.md` in the new project
-3. Load shared Codex preferences from the local cache or `https://github.com/iamwdy/codex-preferences`
-4. Read `WIP_NOTES.md` if the project is being resumed
-5. Replace this README content with project-specific documentation
+2. The script will prefer cloning the GitHub template and fall back to the local template copy if remote clone is unavailable
+3. The bootstrap step prints `AGENTS.md`, shared Codex preferences, and `WIP_NOTES.md`
+4. Replace this README content with project-specific documentation
 
 ## Setup
 1. Copy `.env.example` to `.env`
@@ -37,5 +36,5 @@ Interpretation:
 5. Start project work
 
 Important:
-- `np：<專案名>` is a prompt convention, not a built-in shell command
-- If you want a real `np` terminal command, create a shell alias or function that calls `scripts/new-project.sh`
+- `np：<專案名>` can be used as a prompt convention for Codex
+- If you have a local `np` shell function, it should call `scripts/new-project.sh`

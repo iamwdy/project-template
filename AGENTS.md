@@ -42,3 +42,50 @@ Clarification:
 ## Project-Specific Notes
 
 Add project-specific constraints here.
+
+Quick working rule:
+- Local repo and terminal first.
+- Direct API for deterministic product and integration logic.
+- MCP only when external workspace context or tool actions are actually required.
+
+### Tool Selection Rule
+
+Use this default decision order unless the user explicitly asks otherwise:
+
+1. Local repo and terminal first
+2. Direct API or application code second
+3. MCP only when external tool context or hosted tool actions are actually needed
+4. Web only when the information is time-sensitive or explicitly requested
+
+Principles:
+- Prefer the tool closest to the problem.
+- Do not use MCP just because a platform has an MCP server.
+- If the task can be completed from repo files, local commands, tests, or existing app integrations, stay local.
+- If the task belongs to deterministic product logic, backend integrations, or scheduled jobs, prefer direct API usage over MCP.
+- Use MCP for assistant-style workflows where the model must inspect or act across external systems dynamically.
+
+### API vs MCP Decision Table
+
+| Scenario | Preferred path | Why |
+| --- | --- | --- |
+| Reading code, editing code, running tests, tracing bugs | Local terminal / repo tools | Fastest, most direct, no external dependency |
+| Product feature calling a known external service | Direct API | Deterministic, testable, owned by application logic |
+| Backend sync job, webhook handler, ETL, cron task | Direct API | Stable integration boundary and explicit error handling |
+| Fixed workflow with known endpoint and schema | Direct API | Lower orchestration cost than MCP |
+| Assistant needs to read or write Slack, Notion, Figma, etc. during a task | MCP | Tool access is part of the model workflow |
+| Cross-system research or operations where the next tool depends on findings | MCP | Dynamic tool selection is the point |
+| Creating or updating entities inside an external workspace from the assistant | MCP | Native tool action with less glue code |
+| Need latest public docs, specs, prices, or changing info | Web / official sources | MCP is not the default answer to freshness |
+
+### MCP Trigger Conditions
+
+Use MCP only if at least one of these is true:
+- The answer depends on data that lives in Notion, Slack, Figma, or another external workspace not present in the repo.
+- The task requires creating, updating, searching, or commenting on external platform objects.
+- The model must choose among multiple external tools during the workflow.
+- The user explicitly asks to use a specific MCP-backed tool or platform.
+
+Avoid MCP when:
+- The task is ordinary coding, review, refactoring, or local debugging.
+- The same result can be achieved reliably through existing code paths or direct API integration.
+- The workflow is fixed and should remain deterministic.

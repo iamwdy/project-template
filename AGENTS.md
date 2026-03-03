@@ -43,6 +43,9 @@ Clarification:
 
 Add project-specific constraints here.
 
+Template maintenance rule:
+- If a reusable instruction in another repo's `AGENTS.md` is updated and should apply broadly, sync that change back into the `project-template` repo's `AGENTS.md` as well.
+
 Quick working rule:
 - Local repo and terminal first.
 - Direct API for deterministic product and integration logic.
